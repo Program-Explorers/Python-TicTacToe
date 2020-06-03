@@ -54,19 +54,38 @@ def user_choice_col(char):
 #checks if the user won by a row
 
 def row_win(board, row, character):
+
     if row == 1:
         if board[0] == character and board[1] == character and board[2] == character: 
             return True
+            
     elif row == 2:
         if board[3] == character and board[4] == character and board[5] == character:
             return True
+            
     elif row == 3:
         if board[6] == character and board[7] == character and board[8] == character:
             return True
+            
     else:
         return False
+        
 def col_win(board, col, character):
     
+    if col == 1:
+        if board[0] == character and board[3] == character and board[6] == character:
+            return True
+            
+    elif col ==2:
+        if board[1] == character and board[4] == character and board[7] == character:
+            return True
+            
+    elif col ==3:
+        if board[2] == character and board[5] == character and board[8] == character:
+            return True
+            
+    else:
+        return False
 
     
 def diag_win(board, diag, character):
@@ -112,22 +131,30 @@ def main():
         input_row = user_choice_row(character)
         
     
-        if user_wins == 3:
-            print('You have won! Great Job!')
-            break
-        elif comp_wins ==3:
-            print('The computer has won! Better luck next time.')
-            break
+       ## if user_wins == 3:
+        ##    print('You have won! Great Job!')
+        ##    break
+        ##elif comp_wins ==3:
+        ##    print('The computer has won! Better luck next time.')
+        ##    break
         
-        else:
-            if input_row not in range(1,4) or input_col not in range(1,4):
-                print('\n  OOPS, thats not on the board')
+       
+        if input_row not in range(1,4) or input_col not in range(1,4):
+            print('\n  OOPS, thats not on the board')
             
-            elif board[input_row-1]==character or [input_col-1] == character:
-                print('\n  You have guessed that already')
+        elif board[input_row-1]==character or [input_col-1] == character:
+            print('\n  You have guessed that already')
                 
-            else:
-                board[input_row-1][input_col-1] = character
+        else:
+            board[input_row-1][input_col-1] = character
+            
+            won_row = row_win(board, input_row, character)
+            won_col = col_win(board, input_col, character)
+            
+            if won_row==True or won_col == True:
+                print('You won! Great Job')
+                break
+            
                 
                         
             
