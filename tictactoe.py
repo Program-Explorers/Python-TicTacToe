@@ -127,11 +127,13 @@ def gameon():
     
 
 def main():
+    
     game_on = True
     print(board)
+  
 
     #Greeting
-    print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer!\nFirst to three wins')
+    print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer!\n')
 
     #Calls function and gets the random character X or O, and assigns it to the variable
     character = random_char()
