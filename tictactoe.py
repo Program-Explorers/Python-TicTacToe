@@ -50,23 +50,20 @@ def user_choice_col(char):
     
 
     
-<<<<<<< HEAD
-=======
-    
 #checks if the user won by a row
 
 def row_win(board, row, character):
 
     if row == 1:
-        if board[0] == character and board[1] == character and board[2] == character: 
+        if board[0][0] == character and board[0][1] == character and board[0][2] == character:
             return True
             
     elif row == 2:
-        if board[3] == character and board[4] == character and board[5] == character:
+        if board[1][0] == character and board[1][1] == character and board[1][2] == character:
             return True
             
     elif row == 3:
-        if board[6] == character and board[7] == character and board[8] == character:
+        if board[2][0] == character and board[2][1] == character and board[2][2] == character:
             return True
             
     else:
@@ -93,7 +90,7 @@ def col_win(board, col, character):
 def diag_win(board, diag, character):
     pass
     
->>>>>>> 4cb69338e8091a48bd2ee0591c12ca9612fc50e1
+
 def random_char():
     result = random.randint(1,3)
     
@@ -110,45 +107,7 @@ def random_char():
         
     return character
    
-#checks if the user won by a row
 
-def row_win(board, row, character):
-
-    if row == 0:
-        if board [0] == character and board[1] == character and board[2] == character: 
-            return True
-            
-    elif row == 1:
-        if board[3][3] == character and board[4] == character and board[5] == character:
-            return True
-            
-    elif row == 2:
-        if board[6][6] == character and board[7] == character and board[8] == character:
-            return True
-            
-    else:
-        return False
-        
-def col_win(board, col, character):
-    
-    if col == 1:
-        if board[0] == character and board[3] == character and board[6] == character:
-            return True
-            
-    elif col ==2:
-        if board[1] == character and board[4] == character and board[7] == character:
-            return True
-            
-    elif col ==3:
-        if board[2] == character and board[5] == character and board[8] == character:
-            return True
-            
-    else:
-        return False
-
-    
-def diag_win(board, diag, character):
-    pass
     
 
 def main():
