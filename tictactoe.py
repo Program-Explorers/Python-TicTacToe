@@ -108,39 +108,42 @@ def random_char():
     
     return character
    
-
+# Checks if user wants to play again
+def gameon():
+    again = 'wrong'
+    chosen = False
+    acceptable_values = ['Y', 'N']
+    
+    while again not in acceptable_values:
+        again = input('Would you like to play again? (Y/N) ')
+        
+        if again not in acceptable_values:
+            print('Please type Y or N')
+            
+        elif again in acceptable_values:
+            chosen = True
+    
+    return chosen
     
 
 def main():
+    game_on = True
     print(board)
-    #First to three wins
-    user_wins = 0
-    comp_wins = 0
-    
+
     #Greeting
     print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer!\nFirst to three wins')
 
     #Calls function and gets the random character X or O, and assigns it to the variable
     character = random_char()
     
-    for turn in range(10):
+    #While the user want to play
+    while game_on == True:
         print_board(board)
 
-        print('\n Turn:', turn+1)
-
         #Gathers input for row and column
-    
         input_col = user_choice_col(character)
     
         input_row = user_choice_row(character)
-        
-    
-       ## if user_wins == 3:
-        ##    print('You have won! Great Job!')
-        ##    break
-        ##elif comp_wins ==3:
-        ##    print('The computer has won! Better luck next time.')
-        ##    break
         
        
         if input_row not in range(1,4) or input_col not in range(1,4):
@@ -157,8 +160,17 @@ def main():
             
             if won_row==True or won_col == True:
                 print_board(board)
-                print('\n   You won! Great Job')
-                break
+                print('\n   You won! Great Job\n')
+                game_on = gameon()
+                print (game_on)
+                
+                if game_on == True:
+                    print('Alright lets do it again\n')
+                
+                elif game_on == False:
+                    print('Thanks for playing!\n')
+                    break
+
             
                 
                         
