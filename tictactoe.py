@@ -27,7 +27,7 @@ def user_choice_row(char):
     
     while choice_row.isdigit() == False:
     
-        choice_row = input(f"\nType in the ROW you would like to place your '{char}': ")
+        choice_row = input(f"Type in the ROW you would like to place your '{char}': ")
         
         if choice_row.isdigit() == False:
             print('Sorry that is not a valid number. Please type a number from 1 and 3')
@@ -40,7 +40,7 @@ def user_choice_col(char):
     
     while choice_col.isdigit() == False:
         
-        choice_col = input(f"Type in the COLUMN you would like to place your '{char}': ")
+        choice_col = input(f"\nType in the COLUMN you would like to place your '{char}': ")
         
         if choice_col.isdigit() == False:
             print('Sorry that is not a valid number. Please type a number from 1 and 3')
@@ -97,9 +97,10 @@ def main():
 
         #Gathers input for row and column
     
+        input_col = user_choice_col(character)
+    
         input_row = user_choice_row(character)
         
-        input_col = user_choice_col(character)
     
         if user_wins == 3:
             print('You have won! Great Job!')
