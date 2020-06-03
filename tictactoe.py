@@ -72,15 +72,15 @@ def row_win(board, row, character):
 def col_win(board, col, character):
     
     if col == 1:
-        if board[0] == character and board[3] == character and board[6] == character:
+        if board[0][0] == character and board[1][0] == character and board[2][0] == character:
             return True
             
     elif col ==2:
-        if board[1] == character and board[4] == character and board[7] == character:
+        if board[0][1] == character and board[1][1] == character and board[2][1] == character:
             return True
             
     elif col ==3:
-        if board[2] == character and board[5] == character and board[8] == character:
+        if board[0][2] == character and board[1][2] == character and board[2][2] == character:
             return True
             
     else:
@@ -92,7 +92,7 @@ def diag_win(board, diag, character):
     
 
 def random_char():
-    result = random.randint(1,3)
+    result = random.randint(0,2)
     
     if result == 1:
         print('\nYou are X!\n')
@@ -105,13 +105,14 @@ def random_char():
     else:
         print('Error in choosing your character XO')
         
+    
     return character
    
 
     
 
 def main():
-
+    print(board)
     #First to three wins
     user_wins = 0
     comp_wins = 0
@@ -155,7 +156,8 @@ def main():
             won_col = col_win(board, input_col, character)
             
             if won_row==True or won_col == True:
-                print('You won! Great Job')
+                print_board(board)
+                print('\n   You won! Great Job')
                 break
             
                 
