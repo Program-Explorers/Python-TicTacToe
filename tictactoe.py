@@ -53,13 +53,23 @@ def user_choice_col(char):
     
 #checks if the user won by a row
 
-def row_win():
-    pass
+def row_win(board, row, character):
+    if row == 1:
+        if board[0] == character and board[1] == character and board[2] == character: 
+            return True
+    elif row == 2:
+        if board[3] == character and board[4] == character and board[5] == character:
+            return True
+    elif row == 3:
+        if board[6] == character and board[7] == character and board[8] == character:
+            return True
+    else:
+        return False
+def col_win(board, col, character):
     
-def col_win():
-    pass
+
     
-def diag_win():
+def diag_win(board, diag, character):
     pass
     
 def random_char():
