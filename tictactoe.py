@@ -19,7 +19,6 @@ def print_board(board):
 
 
 
-#Make function here: Chooses a random place for the computer
 
 #Ask for user_input and validate it
 def user_choice_row(char):
@@ -49,7 +48,16 @@ def user_choice_col(char):
     
     
 
-    
+#Make function here: Chooses a random place for the computer
+def comp_ai(list_y):
+    for x in range(0, 3):
+        if x not in board:
+            list_y.append(x)
+            if (char(list_y,'Computer',1)) == True:
+                del list_y[-1]
+                computer_move = x
+                return 1
+            del list_y[-1]   
 #checks if the user won by a row
 
 def row_win(board, row, character):
