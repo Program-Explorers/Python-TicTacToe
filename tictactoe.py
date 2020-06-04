@@ -8,10 +8,10 @@ import random
 #functions
 
 #Creates a board
-board = []
 
-for x in range(0, 3):
-  board.append(["0"] * 3)
+def make_board(bard):
+  for x in range(0, 3):
+    bard.append(["0"] * 3)
 
 def print_board(board):
   for row in board:
@@ -127,7 +127,8 @@ def gameon():
     
 
 def main():
-    
+    board = []
+    make_board(board)
     game_on = True
 
     #Calls function and gets the random character X or O, and assigns it to the variable
@@ -135,6 +136,7 @@ def main():
     
     #While the user want to play
     while game_on == True:
+        
         print('\n'*100)
         print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer!\n')
         print_board(board)
@@ -148,7 +150,7 @@ def main():
         if input_row not in range(1,4) or input_col not in range(1,4):
             print('\n  OOPS, thats not on the board')
             
-        elif board[input_row-1]==character or [input_col-1] == character:
+        elif board[input_row-1][input_col-1]==character:
             print('\n  You have guessed that already')
                 
         else:
@@ -165,6 +167,10 @@ def main():
                 
                 if game_on == True:
                     print('Alright lets do it again\n')
+                    board = []
+                    make_board(board)
+    
+                    
                 
                 elif game_on == False:
                     print('Thanks for playing!\n')
