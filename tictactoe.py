@@ -163,7 +163,6 @@ def main():
                 
         else:
             board[input_row-1][input_col-1] = character
-            
             won_row = row_win(board, input_row, character)
             won_col = col_win(board, input_col, character)
             won_diag = diag_win(board, input_row, input_col, character)
