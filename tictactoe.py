@@ -87,13 +87,22 @@ def col_win(board, col, character):
         return False
 
     
-def diag_win(board, diag, character):
-    pass
+def diag_win(board, row, col ,character):
+    if (row ==1 and col ==1)  or   (row ==2 and col ==2)  or  (row==3 and col==3):
+        if board[0][0] == character and board[1][1]== character and board[2][2] == character:
+            return True
+            
+    elif (row==3 and col==1)  or  (row==2 and col==2)  or  (row==1 and col==3):
+        if board[2][0] == character and board[1][1] ==character and board[0][2]:
+            return True
+            
+    else:
+        return False
     
 
 def random_char():
-    result = random.randint(0,2)
-    
+    result = random.randint(1,2)
+    character = 'default'
     if result == 1:
         print('\nYou are X!\n')
         character = 'X'
@@ -104,8 +113,6 @@ def random_char():
         
     else:
         print('Error in choosing your character XO')
-        
-    
     return character
    
 # Checks if user wants to play again
@@ -158,8 +165,8 @@ def main():
             
             won_row = row_win(board, input_row, character)
             won_col = col_win(board, input_col, character)
-            
-            if won_row==True or won_col == True:
+            won_diag = diag_win(board, input_row, input_col, character)
+            if won_row==True or won_col == True or won_diag ==True:
                 print('\n'*100)
                 print_board(board)
                 print('You won! Great Job\n')
