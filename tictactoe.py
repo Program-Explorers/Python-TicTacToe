@@ -129,17 +129,14 @@ def gameon():
 def main():
     
     game_on = True
-    print(board)
-  
-
-    #Greeting
-    print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer!\n')
 
     #Calls function and gets the random character X or O, and assigns it to the variable
     character = random_char()
     
     #While the user want to play
     while game_on == True:
+        print('\n'*100)
+        print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer!\n')
         print_board(board)
 
         #Gathers input for row and column
@@ -161,10 +158,10 @@ def main():
             won_col = col_win(board, input_col, character)
             
             if won_row==True or won_col == True:
+                print('\n'*100)
                 print_board(board)
-                print('\n   You won! Great Job\n')
+                print('You won! Great Job\n')
                 game_on = gameon()
-                print (game_on)
                 
                 if game_on == True:
                     print('Alright lets do it again\n')
