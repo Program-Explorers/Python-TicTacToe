@@ -10,12 +10,13 @@ import random
 #Creates a board
 
 def make_board(bard):
-  for x in range(0, 3):
-    bard.append(["0"] * 3)
+    for x in range(0, 3):
+        bard.append(["_"] * 3)
+    bard[2][0]=bard[2][1]=bard[2][2] = " "
 
 def print_board(board):
   for row in board:
-    print(' '.join(row))
+    print('|'.join(row))
 
 
 
@@ -166,6 +167,7 @@ def main():
             won_row = row_win(board, input_row, character)
             won_col = col_win(board, input_col, character)
             won_diag = diag_win(board, input_row, input_col, character)
+            
             if won_row==True or won_col == True or won_diag ==True:
                 print('\n'*100)
                 print_board(board)
