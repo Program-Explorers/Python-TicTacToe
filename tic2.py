@@ -132,7 +132,13 @@ def gameon():
             chosen = True
     
     return chosen
+   
+def character_swap(player1):
+    if player1:
+        return True
     
+    return False
+
 
 def main():
     board = []
@@ -140,51 +146,123 @@ def main():
     game_on = True
 
     #Calls function and gets the random character X or O, and assigns it to the variable
-    character = random_char()
+    #character = random_char()
+    
+    player1 = True
+    
     
     #While the user want to play
     while game_on == True:
+        if character_swap(player1):
+            character = 'X'
+            
+        elif character_swap(player1)==False:
+            character = 'O'
+            
+        else:
+            print('ERROR IN CHARACTER SWAP')
+        
         
         print('\n'*100)
-        print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer!\n')
+        print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer or with friend!\n')
         print_board(board)
 
-        #Gathers input for row and column
-        input_col = user_choice_col(character)
+        if player1:
+            print("\nPlayer 1's turn")
+            player1 = False
+            #Gathers input for row and column
+            input_col = user_choice_col(character)
     
-        input_row = user_choice_row(character)
+            input_row = user_choice_row(character)
         
        
-        if input_row not in range(1,4) or input_col not in range(1,4):
-            print('\n  OOPS, thats not on the board')
+            if input_row not in range(1,4) or input_col not in range(1,4):
+                print('\n  OOPS, thats not on the board')
             
-        elif board[input_row-1][input_col-1]==character:
-            print('\n  You have guessed that already')
+            elif board[input_row-1][input_col-1]==character:
+                print('\n  You have guessed that already')
                 
-        else:
-            board[input_row-1][input_col-1] = character
+            else:
+                board[input_row-1][input_col-1] = character
             
-            won_row = row_win(board, input_row, character)
-            won_col = col_win(board, input_col, character)
-            won_diag = diag_win(board, input_row, input_col, character)
+                won_row = row_win(board, input_row, character)
+                won_col = col_win(board, input_col, character)
+                won_diag = diag_win(board, input_row, input_col, character)
             
-            if won_row==True or won_col == True or won_diag ==True:
-                print('\n'*100)
-                print_board(board)
-                print('You won! Great Job\n')
-                game_on = gameon()
-                
-                if game_on == True:
-                    print('Alright lets do it again\n')
-                    board = []
-                    make_board(board)
-    
+                if won_row==True or won_col == True or won_diag ==True:
+                    print('\n'*100)
+                    print_board(board)
                     
+                    if player1 == False:
+                        print('\nPlayer 1 won! Great Job\n')
+                        
+                        
+                    else:
+                        print('\nPlayer 2 won! Great Job\n')
+                        
+                    game_on = gameon()
                 
-                elif game_on == False:
-                    print('Thanks for playing!\n')
-                    break
+                    if game_on == True:
+                        print('Alright lets do it again\n')
+                        board = []
+                        make_board(board)
+                        
+                    elif game_on == False:
+                        print('Thanks for playing!\n')
+                        break
 
+        elif player1 == False:
+            print("\nPlayer 2's turn")
+            player1 = True
+            #Gathers input for row and column
+            input_col = user_choice_col(character)
+            
+            input_row = user_choice_row(character)
+                
+               
+            if input_row not in range(1,4) or input_col not in range(1,4):
+                print('\n  OOPS, thats not on the board')
+                    
+            elif board[input_row-1][input_col-1]==character:
+                print('\n  You have guessed that already')
+                        
+            else:
+                board[input_row-1][input_col-1] = character
+                
+                won_row = row_win(board, input_row, character)
+                won_col = col_win(board, input_col, character)
+                won_diag = diag_win(board, input_row, input_col, character)
+                    
+                if won_row==True or won_col == True or won_diag ==True:
+                    print('\n'*100)
+                    print_board(board)
+                        
+                    if player1 == False:
+                        print('\nPlayer 1 won! Great Job\n')
+                            
+                            
+                    else:
+                        print('\nPlayer 2 won! Great Job\n')
+                        
+                    game_on = gameon()
+                
+                    if game_on == True:
+                        print('Alright lets do it again\n')
+                        board = []
+                        make_board(board)
+                        
+                    elif game_on == False:
+                        print('Thanks for playing!\n')
+                        break
+                        
+                    if game_on == True:
+                        print('Alright lets do it again\n')
+                        board = []
+                        make_board(board)
+                                
+                    elif game_on == False:
+                        print('Thanks for playing!\n')
+                        break
             
                 
                         
