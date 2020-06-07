@@ -20,6 +20,27 @@ def print_board(board):
 
 
 
+def computer_move(row1, row2, row3, character):
+    #if board[0][0] == character and board[0][1] == character:
+    if character =='X':
+        computer_char = 'O'
+    elif character == 'O':
+        computer_char = 'X'
+        
+    check_values = [character, character, 'end']
+    
+    for i in range(2):
+        if row1[i] == character:
+            row1.pop(0)
+            
+        if len(check_values) == 1:
+            #it will then put its character here in place of the dash or space
+            pass
+            
+
+    
+            
+     
 
 #Ask for user_input and validate it
 def user_choice_row(char):
@@ -143,15 +164,18 @@ def main():
     board = []
     make_board(board)
     game_on = True
-
+    
     #Calls function and gets the random character X or O, and assigns it to the variable
     #character = random_char()
     
     player1 = True
-    
-    
+  
     #While the user want to play
     while game_on == True:
+        row1 = board[0]
+        row2 = board[1]
+        row3 = board[2]
+
         if character_swap(player1):
             character = 'X'
             
