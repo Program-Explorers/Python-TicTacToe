@@ -18,9 +18,12 @@ def print_board(board):
     print('|'.join(row))
 
 
-
-#Make function here: Chooses a random place for the computer
-
+#decides randomly which player goes first
+def whoGoesFirst():
+    if random.randint(0, 1) == 0:
+        return 'Player 1'
+    else:
+        return 'Player 2'
 #Ask for user_input and validate it
 def user_choice_row(char):
     choice_row = 'WRONG'
@@ -49,7 +52,7 @@ def user_choice_col(char):
     
     
 
-    
+
 #checks if the user won by a row
 
 def row_win(board, row, character):
@@ -146,6 +149,9 @@ def main():
         
         print('\n'*100)
         print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer!\n')
+        #Prints out which player is going first
+        turn = whoGoesFirst()
+        print('\n' + turn)
         print_board(board)
 
         #Gathers input for row and column
@@ -153,7 +159,6 @@ def main():
     
         input_row = user_choice_row(character)
         
-       
         if input_row not in range(1,4) or input_col not in range(1,4):
             print('\n  OOPS, thats not on the board')
             
@@ -169,8 +174,43 @@ def main():
             if won_row==True or won_col == True or won_diag ==True:
                 print('\n'*100)
                 print_board(board)
-                print('You won! Great Job\n')
-                game_on = gameon()
+                if turn == 'Player 1 goes first':
+                  # Player1's turn.
+                    print_board(board)
+                    position = player_choice(board)
+                    place_marker(board, player1_marker, position)
+
+                    if win_check(theBoard, player1_marker):
+                         print_board(board)
+                         print('Congratulations! You have won the game!')
+                         game_on = False
+                    else:
+                        if full_board_check(board):
+                            print_board(board)
+                            print('The game is a draw!')
+                            break
+                        else:
+                            turn = 'Player 2'
+
+                else:
+                    # Player2's turn.
+
+                    print_board(board)
+                    position = player_choice(board)
+                    place_marker(board, player2_marker, position)
+
+                    if win_check(theBoard, player2_marker):
+                        print_board(board)
+                        print ('Player 2 has won!')
+                        game_on = False
+                    else:
+                        if full_board_check(board):
+                            print_board(board)
+                            print ('The game is a tie!')
+                            break
+                        else:
+                            turn = 'Player 1'
+                            game_on = gameon()
                 
                 if game_on == True:
                     print('Alright lets do it again\n')
