@@ -158,9 +158,6 @@ def main():
             
         elif character_swap(player1)==False:
             character = 'O'
-            
-        else:
-            print('ERROR IN CHARACTER SWAP')
         
         
         print('\n'*100)
