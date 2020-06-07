@@ -24,6 +24,7 @@ def whoGoesFirst():
         return 'Player 1'
     else:
         return 'Player 2'
+        
 #Ask for user_input and validate it
 def user_choice_row(char):
     choice_row = 'WRONG'
@@ -56,7 +57,6 @@ def user_choice_col(char):
 #checks if the user won by a row
 
 def row_win(board, row, character):
-
     if row == 1:
         if board[0][0] == character and board[0][1] == character and board[0][2] == character:
             return True
@@ -69,8 +69,9 @@ def row_win(board, row, character):
         if board[2][0] == character and board[2][1] == character and board[2][2] == character:
             return True
             
-    else:
-        return False
+
+    return False
+        
         
 def col_win(board, col, character):
     
@@ -86,8 +87,8 @@ def col_win(board, col, character):
         if board[0][2] == character and board[1][2] == character and board[2][2] == character:
             return True
             
-    else:
-        return False
+    
+    return False
 
     
 def diag_win(board, row, col ,character):
@@ -99,8 +100,7 @@ def diag_win(board, row, col ,character):
         if board[2][0] == character and board[1][1] ==character and board[0][2]:
             return True
             
-    else:
-        return False
+    return False
     
 
 def random_char():
@@ -143,22 +143,28 @@ def main():
 
     #Calls function and gets the random character X or O, and assigns it to the variable
     character = random_char()
-    
+    print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer!\n')
+    #Prints out which player is going first
+    turn = whoGoesFirst()
     #While the user want to play
     while game_on == True:
         
-        print('\n'*100)
-        print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer!\n')
-        #Prints out which player is going first
-        turn = whoGoesFirst()
+        
+
         print('\n' + turn)
+        
         print_board(board)
 
         #Gathers input for row and column
+        if  turn == 'Player 1':
+            character = 'X'
+        else:
+            character = 'O'
         input_col = user_choice_col(character)
     
         input_row = user_choice_row(character)
         
+        print("[pick char")
         if input_row not in range(1,4) or input_col not in range(1,4):
             print('\n  OOPS, thats not on the board')
             
@@ -170,11 +176,12 @@ def main():
             won_row = row_win(board, input_row, character)
             won_col = col_win(board, input_col, character)
             won_diag = diag_win(board, input_row, input_col, character)
-            
-            if won_row==True or won_col == True or won_diag ==True:
+            print(won_row, won_col,won_diag)
+            print("iffff")
+            if won_row==False and won_col == False and won_diag ==False:
                 print('\n'*100)
                 print_board(board)
-                if turn == 'Player 1 goes first':
+                if turn == 'Player 1':
                   # Player1's turn.
                     print_board(board)
                     position = player_choice(board)
@@ -190,28 +197,31 @@ def main():
                             print('The game is a draw!')
                             break
                         else:
+                            print("SWITCH")
                             turn = 'Player 2'
 
                 else:
                     # Player2's turn.
-
+                    print("p2!")
                     print_board(board)
                     position = player_choice(board)
                     place_marker(board, player2_marker, position)
-
+                    print("here")
                     if win_check(theBoard, player2_marker):
                         print_board(board)
                         print ('Player 2 has won!')
                         game_on = False
                     else:
+                        print("ere")
                         if full_board_check(board):
                             print_board(board)
                             print ('The game is a tie!')
                             break
                         else:
+                            print("SWITCH")
                             turn = 'Player 1'
                             game_on = gameon()
-                
+                print('\n'*100)
                 if game_on == True:
                     print('Alright lets do it again\n')
                     board = []
