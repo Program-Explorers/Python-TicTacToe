@@ -20,48 +20,7 @@ def print_board(board):
 
 
 
-#Make function here: Chooses a random place for the computer
-def getComputerMove(board, computerLetter):
 
-  # Given a board and the computer's letter, determine where to move and return that move.
-
- if computerLetter == 'X':
-
-          playerLetter = 'O'
-
-     else:
-        playerLetter = 'X'
-
-
-     # Here is our algorithm for our Tic Tac Toe AI:
-
-     # First, check if we can win in the next move
-
-     for i in range(1, 10):
-
-         copy = print_board(board)
-
-        if isSpaceFree(copy, i):
-
-            makeMove(copy, computerLetter, i)
-
-            if isWinner(copy, computerLetter):
-
-                 return i
-
-     # Check if the player could win on their next move, and block them.
-
-    for i in range(1, 10):
-
-        copy = getBoardCopy(board)
-
-        if isSpaceFree(copy, i):
-
-            makeMove(copy, playerLetter, i)
-
-            if isWinner(copy, playerLetter):
-
-                 return i
 #Ask for user_input and validate it
 def user_choice_row(char):
     choice_row = 'WRONG'
