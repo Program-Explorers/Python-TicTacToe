@@ -40,13 +40,40 @@ def computer_move_row(row1, row2, row3, board, character, look_char):
             if check_values == 2:
                 #it will then put its character here in place of the dash or space
                 
-                for j in range(2)
-                    if board[row_num][j] == '' or board[row_num][j] == '_'
-                        board[row_num][j] == look_char
+                for j in range(2):
+                    if board[row_num][j] == ' ' or board[row_num][j] == '_':     board[row_num][j] == look_char
                         
             
 def computer_move_col(col1, col2, col3, board, character, look_char):
-    pass
+    col_list = [col1, col2, col3]
+    
+    for col_num, col in enumerate(col_list):
+        check_values = 0
+        
+        for i in range(2):
+            if col[i] == character:
+                check_values += 1
+                
+            if check_values == 2:
+                for j in range(2):
+                    if board[col_num][j] == ' ' or board[col_num][j] == '_':
+                        board[col_num][j] == look_char
+                        
+                        
+def computer_move_dia(dia1, dia2, board, character, look_char):
+    dia_list = [dia1, dia2]
+    
+    for dia_num, dia in enumerate(dia_list):
+        check_values = 0
+        
+        for i in range(2):
+            if col[i] == character:
+                check_values += 1
+                
+            if check_values == 2:
+                for j in range(2):
+                    if board[dia_num][j] == ' ' or board[dia_num][j] == '_':
+                        board[dia_num][j] == look_char
 
 
 #Ask for user_input and validate it
@@ -187,6 +214,9 @@ def main():
         col2 = [board[0][1], board[1][1], board[2][1]]
         col3 = [board[0][2], board[1][2], board[2][2]]
 
+        dia1 = [board[0][0], board[1][1], board[2][2]]
+        dia2 = [board[0][2], board[1][1], board[2][0]]
+        
         if character_swap(player1):
             character = 'X'
             
