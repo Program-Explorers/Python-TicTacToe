@@ -2,6 +2,7 @@
 # new branch test!
 #importing libraries
 # import numpy as np
+#TEST
 import random
 
 
@@ -67,7 +68,7 @@ def computer_move_dia(dia1, dia2, board, character, look_char):
         check_values = 0
         
         for i in range(2):
-            if col[i] == character:
+            if dia[i] == character:
                 check_values += 1
                 
             if check_values == 2:
@@ -307,15 +308,15 @@ def main():
                         
                     game_on = gameon()
                 
-
                     if game_on == True:
                         print('Alright lets do it again\n')
                         board = []
                         make_board(board)
-                                
+                        
                     elif game_on == False:
                         print('Thanks for playing!\n')
                         break
+                        
             
                 
                         
