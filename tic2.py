@@ -307,15 +307,7 @@ def main():
                         
                     game_on = gameon()
                 
-                    if game_on == True:
-                        print('Alright lets do it again\n')
-                        board = []
-                        make_board(board)
-                        
-                    elif game_on == False:
-                        print('Thanks for playing!\n')
-                        break
-                        
+
                     if game_on == True:
                         print('Alright lets do it again\n')
                         board = []
