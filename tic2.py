@@ -18,29 +18,36 @@ def print_board(board):
   for row in board:
     print('|'.join(row))
 
-
-
-def computer_move(row1, row2, row3, character):
-    #if board[0][0] == character and board[0][1] == character:
+def computer_char(character):
     if character =='X':
-        computer_char = 'O'
+          return 'O'
     elif character == 'O':
-        computer_char = 'X'
-        
-    check_values = [character, character, 'end']
-    
-    for i in range(2):
-        if row1[i] == character:
-            row1.pop(0)
-            
-        if len(check_values) == 1:
-            #it will then put its character here in place of the dash or space
-            pass
-            
+          return 'X'
 
+
+#We can use this function for the computer to win or to block the opponent
+def computer_move_row(row1, row2, row3, board, character, look_char):
+  
+    row_list = [row1, row2, row3]
     
+    for row_num, row in enumerate(row_list):
+        check_values = 0
+        
+        for i in range(2):
+            if row[i] == character:
+                check_values += 1
+                
+            if check_values == 2:
+                #it will then put its character here in place of the dash or space
+                
+                for j in range(2)
+                    if board[row_num][j] == '' or board[row_num][j] == '_'
+                        board[row_num][j] == look_char
+                        
             
-     
+def computer_move_col(col1, col2, col3, board, character, look_char):
+    pass
+
 
 #Ask for user_input and validate it
 def user_choice_row(char):
@@ -175,6 +182,10 @@ def main():
         row1 = board[0]
         row2 = board[1]
         row3 = board[2]
+        
+        col1 = [board[0][0], board[1][0], board[2][0]]
+        col2 = [board[0][1], board[1][1], board[2][1]]
+        col3 = [board[0][2], board[1][2], board[2][2]]
 
         if character_swap(player1):
             character = 'X'
