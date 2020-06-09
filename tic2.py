@@ -199,18 +199,23 @@ def random_char():
 def gameon():
     again = 'wrong'
     chosen = False
-    acceptable_values = ['Y', 'N','y', 'n', 'yes','Yes', 'no', 'No']
+    acceptable_values = ['Y', 'y', 'yes','Yes']
+    un_acceptable_values = ['n', 'N', 'No', 'no']
     
-    while again not in acceptable_values:
+    while again not in acceptable_values or again not in un_acceptable_values:
         again = input('Would you like to play again? (Y/N) ')
         
-        if again not in acceptable_values:
+        if again not in acceptable_values or again not in un_acceptable_values:
             print('Please type Y or N')
-            
-        elif again in acceptable_values:
+
+        if again in acceptable_values:
             chosen = True
-    
-    return chosen
+            return chosen
+
+        elif again in un_acceptable_values:
+            chosen = False
+            return chosen
+     
    
 def character_swap(player1):
     if player1:
