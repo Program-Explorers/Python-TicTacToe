@@ -28,21 +28,31 @@ def computer_char(character):
 
 #We can use this function for the computer to win or to block the opponent
 def computer_move_row(row1, row2, row3, board, character, look_char):
-  
+    print('beggining row')
     row_list = [row1, row2, row3]
     
     for row_num, row in enumerate(row_list):
+        print('1st FOR  row')
         check_values = 0
         
-        for i in range(2):
+        for i in range(0,2):
+            print('2nd FOR  row')
             if row[i] == character:
                 check_values += 1
+                print('1st IF  row')
                 
             if check_values == 2:
+                print('2nd IF  row')
                 #it will then put its character here in place of the dash or space
-                
-                for j in range(2):
-                    if board[row_num][j] == ' ' or board[row_num][j] == '_':     board[row_num][j] == look_char
+            
+                for j in range(0,2):
+                    print('3rd FOR  row')
+                    if board[row_num][j] == ' ' or board[row_num][j] == '_':
+                        print('3rd IF  row')
+                        board[row_num][j] == look_char
+                        return True
+    
+    return False
                         
             
 def computer_move_col(col1, col2, col3, board, character, look_char):
@@ -59,7 +69,8 @@ def computer_move_col(col1, col2, col3, board, character, look_char):
                 for j in range(2):
                     if board[col_num][j] == ' ' or board[col_num][j] == '_':
                         board[col_num][j] == look_char
-                        
+                        return True
+    return False
                         
 def computer_move_dia(dia1, dia2, board, character, look_char):
     dia_list = [dia1, dia2]
@@ -75,7 +86,20 @@ def computer_move_dia(dia1, dia2, board, character, look_char):
                 for j in range(2):
                     if board[dia_num][j] == ' ' or board[dia_num][j] == '_':
                         board[dia_num][j] == look_char
+                        return True
+    return False
 
+
+def comp_move_random(board, character, look_char):
+    x = 0
+    y = 0
+    
+    while board[x][y] == character or board[x][y] == look_char:
+        x = random.randint(0,2)
+        y = random.randint(0,2)
+
+    board[x][y] = character
+    
 
 #Ask for user_input and validate it
 def user_choice_row(char):
@@ -175,7 +199,7 @@ def random_char():
 def gameon():
     again = 'wrong'
     chosen = False
-    acceptable_values = ['Y', 'N']
+    acceptable_values = ['Y', 'N','y', 'n', 'yes','Yes', 'no', 'No']
     
     while again not in acceptable_values:
         again = input('Would you like to play again? (Y/N) ')
@@ -206,28 +230,32 @@ def main():
     
     player1 = True
     is_user = True
-  
+    possibles_choice = ['Y','y', 'Yes', 'yes']
+    
     #While the user want to play
     while game_on == True:
         
         
-        
         print('\n'*100)
+        print('*---------------------------------Tic-Tac-Toe----------------------------------*\n\n')
+        
         print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer or with friend!\n')
         
         choice = input('Do you want to play with the computer? (Y/N): ')
         
-        if choice == 'Y':
+        if choice in possibles_choice:
             computer_yes = True
             
-        elif choice == 'N':
+        elif choice not in possibles_choice:
             computer_yes = False
+            
+        else:
+            print('Please write Y or N')
             
         
         
         while computer_yes:
-            print('\n'*100)
-
+            
             row1 = board[0]
             row2 = board[1]
             row3 = board[2]
@@ -239,15 +267,17 @@ def main():
             dia1 = [board[0][0], board[1][1], board[2][2]]
             dia2 = [board[0][2], board[1][1], board[2][0]]
             
+            
+            print('\n'*100)
+            print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
             print_board(board)
         
-            
-            
-            
+        
             #user
             if is_user == True:
-                print("\nYour turn")
+                print("\nYour turn now")
                 player1 = False
+                is_user = False
                 
                 #Gathers input for row and column
                 input_col = user_choice_col(character)
@@ -269,38 +299,52 @@ def main():
                                
                 if won_row==True or won_col == True or won_diag ==True:
                     print('\n'*100)
+                    print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
                     print_board(board)
-                    print('\nPlayer 1 won! Great Job\n')
+                    print('\nYou Won! Great Job\n')
                     break
                                            
-                is_user == False
-                
                 
                 
                 
               #computer
             if is_user == False:
+                
+                if character == 'X':
+                    look_char = 'O'
+                else:
+                    look_char == 'X'
                 print("It's the computer's turn")
-                computer_move_row(row1, row2, row3, board, character, look_char)
-                computer_move_row(row1, row2, row3, board, look_char, character)
+                comp_row1 = computer_move_row(row1, row2, row3, board, character, look_char)
+                comp_row2 = computer_move_row(row1, row2, row3, board, look_char, character)
                 
-                computer_move_col(col1,col2, col3, board, character, look_char)
-                computer_move_col(col1,col2, col3, board, look_char, character)
+                comp_col1 = computer_move_col(col1,col2, col3, board, character, look_char)
+                comp_col2 = computer_move_col(col1,col2, col3, board, look_char, character)
                 
-                computer_move_dia(dia1, dia2, board, character, look_char)
-                computer_move_dia(dia1, dia2, board, look_char, character)
+                comp_dia1 = computer_move_dia(dia1, dia2, board, character, look_char)
+                comp_dia2 = computer_move_dia(dia1, dia2, board, look_char, character)
                 
                 
-                is_user == True
+                if comp_row1 == True or comp_row2 == True or comp_col1 == True or comp_col2 == True or comp_dia1 == True or comp_dia2 == True:
+                        print('\n'*100)
+                        print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
+                        print('The computer won! Better luck next time.')
+                        
+                        break
+                        
+                else:
+                    comp_move_random(board, look_char, character)
+                
+                is_user = True
                 
             
-        if character == 'X':
-                look_char = 'O'
-        else:
-            look_char == 'X'
+      
                 
         while computer_yes == False:
-        
+            print('\n'*100)
+
+            print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
+
             row1 = board[0]
             row2 = board[1]
             row3 = board[2]
@@ -344,11 +388,10 @@ def main():
                 
                     if won_row==True or won_col == True or won_diag ==True:
                         print('\n'*100)
+                        print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
                         print_board(board)
-                        
-                        if player1 == False:
-                            print('\nPlayer 1 won! Great Job\n')
-                            break
+                        print('\nPlayer 1 won! Great Job\n')
+                        break
                             
         
             elif player1 == False:
@@ -375,6 +418,7 @@ def main():
                         
                     if won_row==True or won_col == True or won_diag ==True:
                         print('\n'*100)
+                        print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
                         print_board(board)
                         print('\nPlayer 2 won! Great Job\n')
                         break
