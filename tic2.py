@@ -28,28 +28,27 @@ def computer_char(character):
 
 #We can use this function for the computer to win or to block the opponent
 def computer_move_row(row1, row2, row3, board, character, look_char):
-    print('beggining row')
     row_list = [row1, row2, row3]
     
     for row_num, row in enumerate(row_list):
-        print('1st FOR  row')
+
         check_values = 0
         
-        for i in range(0,2):
-            print('2nd FOR  row')
+        for i in range(0, 3):
+  
             if row[i] == character:
                 check_values += 1
-                print('1st IF  row')
+
                 
             if check_values == 2:
-                print('2nd IF  row')
+
                 #it will then put its character here in place of the dash or space
             
-                for j in range(0,2):
-                    print('3rd FOR  row')
+                for j in range(0,3):
+  
                     if board[row_num][j] == ' ' or board[row_num][j] == '_':
-                        print('3rd IF  row')
-                        board[row_num][j] == look_char
+          
+                        board[row_num][j] = look_char
                         return True
     
     return False
@@ -57,35 +56,40 @@ def computer_move_row(row1, row2, row3, board, character, look_char):
             
 def computer_move_col(col1, col2, col3, board, character, look_char):
     col_list = [col1, col2, col3]
-    
-    for col_num, col in enumerate(col_list):
+
+    for col_num, col in enumerate(col_list): # go through colums (verticle)
         check_values = 0
-        
-        for i in range(2):
-            if col[i] == character:
+
+        for i in range(0, 3):
+            if col[i] == character: # see two in a row
+
                 check_values += 1
                 
             if check_values == 2:
-                for j in range(2):
-                    if board[col_num][j] == ' ' or board[col_num][j] == '_':
-                        board[col_num][j] == look_char
+
+                for row in range(0, 3): # find empty row (go throw rows again)
+                    if board[row][col_num] == ' ' or board[row][col_num] == '_':
+                        board[row][col_num] = look_char
+                        print(row, col_num)
                         return True
+                        
     return False
                         
 def computer_move_dia(dia1, dia2, board, character, look_char):
     dia_list = [dia1, dia2]
-    
+    print('dia list:',dia_list)
     for dia_num, dia in enumerate(dia_list):
         check_values = 0
+        print(f'dia num: {dia_num}')
         
-        for i in range(2):
-            if dia[i] == character:
+        for row in range(0, 3):
+            if dia[row] == character:
                 check_values += 1
                 
             if check_values == 2:
-                for j in range(2):
-                    if board[dia_num][j] == ' ' or board[dia_num][j] == '_':
-                        board[dia_num][j] == look_char
+                for row in range(0, 3):
+                    if board[row][dia_num] == ' ' or board[row][dia_num] == '_':
+                        board[row][dia_num] = look_char
                         return True
     return False
 
@@ -222,6 +226,22 @@ def character_swap(player1):
         return True
     
     return False
+    
+
+def win_func(comp, board):
+    print('win func')
+    if comp:
+        print('\n'*100)
+        print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
+        print_board(board)
+        print('\nThe computer won! Better luck next time.')
+        
+    else:
+        print('\n'*100)
+        print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
+        print_board(board)
+        print('\nYou won! Great Job')
+    
 
 
 def main():
@@ -230,8 +250,6 @@ def main():
     game_on = True
     character ='X'
     
-    #Calls function and gets the random character X or O, and assigns it to the variable
-    #character = random_char()
     
     player1 = True
     is_user = True
@@ -243,35 +261,23 @@ def main():
         
         print('\n'*100)
         print('*---------------------------------Tic-Tac-Toe----------------------------------*\n\n')
-        
+
         print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer or with friend!\n')
-        
+
         choice = input('Do you want to play with the computer? (Y/N): ')
-        
+
         if choice in possibles_choice:
             computer_yes = True
-            
+
         elif choice not in possibles_choice:
             computer_yes = False
-            
+
         else:
             print('Please write Y or N')
-            
-        
-        
+
+
+
         while computer_yes:
-            
-            row1 = board[0]
-            row2 = board[1]
-            row3 = board[2]
-            
-            col1 = [board[0][0], board[1][0], board[2][0]]
-            col2 = [board[0][1], board[1][1], board[2][1]]
-            col3 = [board[0][2], board[1][2], board[2][2]]
-            
-            dia1 = [board[0][0], board[1][1], board[2][2]]
-            dia2 = [board[0][2], board[1][1], board[2][0]]
-            
             
             print('\n'*100)
             print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
@@ -281,7 +287,6 @@ def main():
             #user
             if is_user == True:
                 print("\nYour turn now")
-                player1 = False
                 is_user = False
                 
                 #Gathers input for row and column
@@ -314,42 +319,68 @@ def main():
                 
               #computer
             if is_user == False:
+                is_user = True
+                row1 = board[0]
+                row2 = board[1]
+                row3 = board[2]
+               
+                col1 = [board[0][0], board[1][0], board[2][0]]
+                col2 = [board[0][1], board[1][1], board[2][1]]
+                col3 = [board[0][2], board[1][2], board[2][2]]
+               
+                dia1 = [board[0][0], board[1][1], board[2][2]]
+                dia2 = [board[0][2], board[1][1], board[2][0]]
                 
                 if character == 'X':
                     look_char = 'O'
                 else:
                     look_char == 'X'
+                    
                 print("It's the computer's turn")
-                comp_row1 = computer_move_row(row1, row2, row3, board, character, look_char)
-                comp_row2 = computer_move_row(row1, row2, row3, board, look_char, character)
+                comp_row1 = computer_move_row(row1, row2, row3, board, look_char, look_char)
+                if comp_row1:
+                    win_func(True, board)
+                    break
+                    
+                comp_col1 = computer_move_col(col1,col2, col3, board, look_char, look_char)
+                if comp_col1:
+                    win_func(True, board)
+                    break
+                    
+                comp_dia1 = computer_move_dia(dia1, dia2, board, look_char, look_char)
+                if comp_dia1:
+                    win_func(True, board)
+                    break
+                    
+    
+            
+                comp_row2 = computer_move_row(row1, row2, row3, board, character, look_char)
+                if comp_row2:
+                    continue
+                    
+                comp_col2 = computer_move_col(col1,col2, col3, board, character, look_char)
+                if comp_col2:
+                    continue
+                    
+                comp_dia2 = computer_move_dia(dia1, dia2, board, character, look_char)
+                if comp_dia2:
+                    continue
+                    
+
+                comp_move_random(board, look_char, character)
                 
-                comp_col1 = computer_move_col(col1,col2, col3, board, character, look_char)
-                comp_col2 = computer_move_col(col1,col2, col3, board, look_char, character)
                 
-                comp_dia1 = computer_move_dia(dia1, dia2, board, character, look_char)
-                comp_dia2 = computer_move_dia(dia1, dia2, board, look_char, character)
-                
-                
-                if comp_row1 == True or comp_row2 == True or comp_col1 == True or comp_col2 == True or comp_dia1 == True or comp_dia2 == True:
-                        print('\n'*100)
-                        print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
-                        print('The computer won! Better luck next time.')
-                        
-                        break
-                        
-                else:
-                    comp_move_random(board, look_char, character)
-                
-                is_user = True
                 
             
       
                 
         while computer_yes == False:
+        
             print('\n'*100)
 
             print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
 
+            
             row1 = board[0]
             row2 = board[1]
             row3 = board[2]
