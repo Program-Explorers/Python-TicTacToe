@@ -230,15 +230,14 @@ def character_swap(player1):
 
 def win_func(comp, board):
     print('win func')
+    print('\n'*100)
+    print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
+
     if comp:
-        print('\n'*100)
-        print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
         print_board(board)
         print('\nThe computer won! Better luck next time.')
         
     else:
-        print('\n'*100)
-        print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
         print_board(board)
         print('\nYou won! Great Job')
     
@@ -339,17 +338,21 @@ def main():
                 print("It's the computer's turn")
                 comp_row1 = computer_move_row(row1, row2, row3, board, look_char, look_char)
                 if comp_row1:
+                    
                     win_func(True, board)
+     
                     break
                     
                 comp_col1 = computer_move_col(col1,col2, col3, board, look_char, look_char)
                 if comp_col1:
                     win_func(True, board)
+           
                     break
                     
                 comp_dia1 = computer_move_dia(dia1, dia2, board, look_char, look_char)
                 if comp_dia1:
                     win_func(True, board)
+
                     break
                     
     
