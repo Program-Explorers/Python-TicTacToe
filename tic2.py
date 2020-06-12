@@ -78,19 +78,32 @@ def computer_move_col(col1, col2, col3, board, character, look_char):
 def computer_move_dia(dia1, dia2, board, character, look_char):
     dia_list = [dia1, dia2]
     print('dia list:',dia_list)
+    
     for dia_num, dia in enumerate(dia_list):
         check_values = 0
         print(f'dia num: {dia_num}')
         
-        for row in range(0, 3):
-            if dia[row] == character:
+        for i in range(0, 3):
+            if dia[i] == character:
                 check_values += 1
+                print('character')
                 
-            if check_values == 2:
-                for row in range(0, 3):
-                    if board[row][dia_num] == ' ' or board[row][dia_num] == '_':
-                        board[row][dia_num] = look_char
-                        return True
+        if check_values == 2:
+            print('should win or block')
+            
+            for row in range(0, 3):
+            
+                if board[row][2-row] == ' ' or board[row][2-row] == '_':
+                    print('going to win or block now')
+                    print(row,2-row)
+                    board[row][2-row] = look_char
+                    return True
+                    
+                elif board[row][row] == ' ' or board[row][row] == '_':
+                    print('going to win or block now')
+                    print(row,row)
+                    board[row][row] = look_char
+                    return True
     return False
 
 
@@ -285,6 +298,10 @@ def main():
         
             #user
             if is_user == True:
+                if character == 'X':
+                    opp_char = 'O'
+                else:
+                    opp_char == 'X'
                 print("\nYour turn now")
                 is_user = False
                 
@@ -300,6 +317,12 @@ def main():
                     print('\n  You have guessed that already')
                                    
                 else:
+                    while board[input_col-1][input_row-1] == opp_char or board[input_col-1][input_row-1] == character:
+                        print('\nSorry that spot is already TAKEN')
+                        input_col = user_choice_col(character)
+                        input_row = user_choice_row(character)
+                
+                    print('place:', board[input_row-1][input_col-1])
                     board[input_row-1][input_col-1] = character
                                
                     won_row = row_win(board, input_row, character)
@@ -338,23 +361,18 @@ def main():
                 print("It's the computer's turn")
                 comp_row1 = computer_move_row(row1, row2, row3, board, look_char, look_char)
                 if comp_row1:
-                    
                     win_func(True, board)
-     
                     break
                     
                 comp_col1 = computer_move_col(col1,col2, col3, board, look_char, look_char)
                 if comp_col1:
                     win_func(True, board)
-           
                     break
                     
                 comp_dia1 = computer_move_dia(dia1, dia2, board, look_char, look_char)
                 if comp_dia1:
                     win_func(True, board)
-
                     break
-                    
     
             
                 comp_row2 = computer_move_row(row1, row2, row3, board, character, look_char)
