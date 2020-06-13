@@ -120,29 +120,29 @@ def comp_move_random(board, character, look_char):
 
 #Ask for user_input and validate it
 def user_choice_row(char):
-    choice_row = 'WRONG'
+    choice_row = 10
     
-    while choice_row.isdigit() == False:
-    
-        choice_row = input(f"Type in the ROW you would like to place your '{char}': ")
+    while choice_row not in range(1,3):
         
-        if choice_row.isdigit() == False:
+        choice_row = int(input(f"Type in the ROW you would like to place your '{char}': "))
+        
+        if choice_row not in range(1,3):
             print('Sorry that is not a valid number. Please type a number from 1 and 3')
             
-    return int(choice_row)
+    return choice_row
     
 
 def user_choice_col(char):
-    choice_col = 'NOPE'
+    choice_col = 11
     
-    while choice_col.isdigit() == False:
+    while choice_col not in range(1, 4):
         
-        choice_col = input(f"\nType in the COLUMN you would like to place your '{char}': ")
+        choice_col = int(input(f"\nType in the COLUMN you would like to place your '{char}': "))
         
-        if choice_col.isdigit() == False:
+        if choice_col not in range(1, 4):
             print('Sorry that is not a valid number. Please type a number from 1 and 3')
             
-    return int(choice_col)
+    return choice_col
     
     
 
@@ -317,6 +317,10 @@ def main():
                     print('\n  You have guessed that already')
                                    
                 else:
+                    while board[input_col-1][input_row-1] == opp_char or board[input_col-1][input_row-1] == character:
+                        print('\nSorry that spot is already TAKEN')
+                        input_col = user_choice_col(character)
+                        input_row = user_choice_row(character)
                 
                     print('place:', board[input_row-1][input_col-1])
                     board[input_row-1][input_col-1] = character
