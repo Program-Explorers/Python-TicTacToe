@@ -122,11 +122,11 @@ def comp_move_random(board, character, look_char):
 def user_choice_row(char):
     choice_row = 10
     
-    while choice_row not in range(1,3):
+    while choice_row not in range(1, 3):
         
         choice_row = int(input(f"Type in the ROW you would like to place your '{char}': "))
         
-        if choice_row not in range(1,3):
+        if choice_row not in range(1, 3):
             print('Sorry that is not a valid number. Please type a number from 1 and 3')
             
     return choice_row
@@ -144,6 +144,12 @@ def user_choice_col(char):
             
     return choice_col
     
+def val_input(board, row, col):
+    if board[row-1][col-1] != ' ' or board[row-1][col-1] != '_':
+        print('\nLooks like that spot is already taken')
+        return False
+        
+    return True
     
 
     
