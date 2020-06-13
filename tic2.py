@@ -317,10 +317,6 @@ def main():
                     print('\n  You have guessed that already')
                                    
                 else:
-                    while board[input_col-1][input_row-1] == opp_char or board[input_col-1][input_row-1] == character:
-                        print('\nSorry that spot is already TAKEN')
-                        input_col = user_choice_col(character)
-                        input_row = user_choice_row(character)
                 
                     print('place:', board[input_row-1][input_col-1])
                     board[input_row-1][input_col-1] = character
