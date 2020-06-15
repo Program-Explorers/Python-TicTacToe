@@ -122,11 +122,11 @@ def comp_move_random(board, character, look_char):
 def user_choice_row(char):
     choice_row = 10
     
-    while choice_row not in range(1, 3):
+    while choice_row not in range(1, 4):
         
         choice_row = int(input(f"Type in the ROW you would like to place your '{char}': "))
         
-        if choice_row not in range(1, 3):
+        if choice_row not in range(1, 4):
             print('Sorry that is not a valid number. Please type a number from 1 and 3')
             
     return choice_row
@@ -145,7 +145,9 @@ def user_choice_col(char):
     return choice_col
     
 def val_input(board, row, col):
+    print('at function')
     if board[row-1][col-1] != ' ' or board[row-1][col-1] != '_':
+        print('fix')
         print('\nLooks like that spot is already taken')
         return False
         
@@ -282,16 +284,14 @@ def main():
 
         print('\n\nWelcome to Tic Tac Toe!\nYou will be playing with a computer or with friend!\n')
 
-        choice = input('Do you want to play with the computer? (Y/N): ')
+        choice = input('Do you want to play with the computer or 2 player? (C/P): ')
 
-        if choice in possibles_choice:
+        if choice[0].lower() == 'c':
             computer_yes = True
 
-        elif choice not in possibles_choice:
+        else:
             computer_yes = False
 
-        else:
-            print('Please write Y or N')
 
 
 
@@ -312,28 +312,26 @@ def main():
                 is_user = False
                 
                 #Gathers input for row and column
+     
                 input_col = user_choice_col(character)
                 input_row = user_choice_row(character)
+                 
+
+                while board[input_row-1][input_col-1] == 'X' or board[input_row-1][input_col-1] == 'O':
+                    print('looks like that spot is already taken')
+                    print_board(board)
+                    input_col = user_choice_col(character)
+                    input_row = user_choice_row(character)
+                    val_input(board, input_row, input_col)
+            
+
+            
+                print('place:', board[input_row-1][input_col-1])
+                board[input_row-1][input_col-1] = character
                            
-                          
-                if input_row not in range(1,4) or input_col not in range(1,4):
-                    print('\n  OOPS, thats not on the board')
-                               
-                elif board[input_row-1][input_col-1]==character:
-                    print('\n  You have guessed that already')
-                                   
-                else:
-                    while board[input_col-1][input_row-1] == opp_char or board[input_col-1][input_row-1] == character:
-                        print('\nSorry that spot is already TAKEN')
-                        input_col = user_choice_col(character)
-                        input_row = user_choice_row(character)
-                
-                    print('place:', board[input_row-1][input_col-1])
-                    board[input_row-1][input_col-1] = character
-                               
-                    won_row = row_win(board, input_row, character)
-                    won_col = col_win(board, input_col, character)
-                    won_diag = diag_win(board, input_row, input_col, character)
+                won_row = row_win(board, input_row, character)
+                won_col = col_win(board, input_col, character)
+                won_diag = diag_win(board, input_row, input_col, character)
                                
                 if won_row==True or won_col == True or won_diag ==True:
                     print('\n'*100)
@@ -436,25 +434,25 @@ def main():
                 input_row = user_choice_row(character)
             
            
-                if input_row not in range(1,4) or input_col not in range(1,4):
-                    print('\n  OOPS, thats not on the board')
+                while board[input_row-1][input_col-1] == 'X' or board[input_row-1][input_col-1] == 'O':
+                    print('looks like that spot is already taken')
+                    print_board(board)
+                    input_col = user_choice_col(character)
+                    input_row = user_choice_row(character)
+                    val_input(board, input_row, input_col)
                 
-                elif board[input_row-1][input_col-1]==character:
-                    print('\n  You have guessed that already')
-                    
-                else:
-                    board[input_row-1][input_col-1] = character
+                board[input_row-1][input_col-1] = character
+            
+                won_row = row_win(board, input_row, character)
+                won_col = col_win(board, input_col, character)
+                won_diag = diag_win(board, input_row, input_col, character)
                 
-                    won_row = row_win(board, input_row, character)
-                    won_col = col_win(board, input_col, character)
-                    won_diag = diag_win(board, input_row, input_col, character)
-                
-                    if won_row==True or won_col == True or won_diag ==True:
-                        print('\n'*100)
-                        print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
-                        print_board(board)
-                        print('\nPlayer 1 won! Great Job\n')
-                        break
+                if won_row == True or won_col == True or won_diag == True:
+                    print('\n'*100)
+                    print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
+                    print_board(board)
+                    print('\nPlayer 1 won! Great Job\n')
+                    break
                             
         
             elif player1 == False:
@@ -466,25 +464,25 @@ def main():
                 input_row = user_choice_row(character)
                     
                    
-                if input_row not in range(1,4) or input_col not in range(1,4):
-                    print('\n  OOPS, thats not on the board')
-                        
-                elif board[input_row-1][input_col-1]==character:
-                    print('\n  You have guessed that already')
-                            
-                else:
-                    board[input_row-1][input_col-1] = character
+                while board[input_row-1][input_col-1] == 'X' or board[input_row-1][input_col-1] == 'O':
+                    print('looks like that spot is already taken')
+                    print_board(board)
+                    input_col = user_choice_col(character)
+                    input_row = user_choice_row(character)
+                    val_input(board, input_row, input_col)
+                
+                board[input_row-1][input_col-1] = character
+                
+                won_row = row_win(board, input_row, character)
+                won_col = col_win(board, input_col, character)
+                won_diag = diag_win(board, input_row, input_col, character)
                     
-                    won_row = row_win(board, input_row, character)
-                    won_col = col_win(board, input_col, character)
-                    won_diag = diag_win(board, input_row, input_col, character)
-                        
-                    if won_row==True or won_col == True or won_diag ==True:
-                        print('\n'*100)
-                        print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
-                        print_board(board)
-                        print('\nPlayer 2 won! Great Job\n')
-                        break
+                if won_row==True or won_col == True or won_diag ==True:
+                    print('\n'*100)
+                    print('*---------------------------------Tic-Tac-Toe----------------------------------*\n')
+                    print_board(board)
+                    print('\nPlayer 2 won! Great Job\n')
+                    break
              
              
              
